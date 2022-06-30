@@ -3,7 +3,7 @@
 const alive = document.querySelector(".alive");
 const checkin = document.querySelector("#checkin-time");
 
-fetch("http://localhost:3000/")
+fetch("https://checkoncam.herokuapp.com/")
   .then((response) => response.json())
   .then((data) => {
     let lastTime = new Date(data.lastUpdated);
