@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const fs = require("fs").promises;
 
 const filename = "./data/data.json";
@@ -6,6 +7,8 @@ let data = require(filename);
 
 const app = express();
 const port = 3000;
+
+app.use("cors");
 
 const newDate = () => new Date().toString();
 
