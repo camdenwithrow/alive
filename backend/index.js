@@ -8,7 +8,7 @@ let data = require(filename);
 const app = express();
 const port = 3000;
 
-app.use("cors");
+app.use(cors());
 
 const newDate = () => new Date().toString();
 
