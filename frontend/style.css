@@ -16,6 +16,16 @@ body {
   background-color: #111827;
 }
 
+.heading {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+#emoji {
+  font-size: xx-large;
+}
+
 .feeling {
     color: #9ca3af
 }
