@@ -16,6 +16,10 @@ body {
   background-color: #111827;
 }
 
+.frame {
+  pointer-events: none;
+}
+
 .heading {
   display: flex;
   align-items: center;
