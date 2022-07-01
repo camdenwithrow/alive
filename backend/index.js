@@ -11,6 +11,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(cors());
+app.use(express.json());
 
 const newDate = () => new Date().toString();
 
@@ -19,17 +20,16 @@ app.get("/", (req, res) => {
   res.send(data);
 });
 
-app.put("/:feeling", async (req, res) => {
+app.put("/", async (req, res) => {
   const id = data.id;
   const name = data.name
-  const feeling= req.params.feeling;
-  console.log(feeling)
+  const {feeling, emoji, gif} = req.body
   let gifUrl;
   const date =  newDate()
 
-  const encodeFeeling = encodeURIComponent(feeling)
+  const encodeFeeling = encodeURIComponent(gif)
 
-  axios.get(`http://api.giphy.com/v1/gifs/search?api_key=${process.env.GIPHY}&q=${encodeFeeling}`)
+  axios.get(`http://api.giphy.com/v1/gifs/search?api_key=${process.env.GIPHY}&q=${gif}`)
   .then(function (response) {
     // handle success
     gifUrl = response.data.data[0].embed_url
@@ -40,7 +40,7 @@ app.put("/:feeling", async (req, res) => {
   })
   .then(function () {
     // always executed
-    data = { id: id, name: name, feeling: feeling, gif: gifUrl, lastUpdated: date };
+    data = { id: id, name: name, feeling: feeling, emoji: emoji, gif: gifUrl, lastUpdated: date };
     fs.writeFile(filename, JSON.stringify(data), "utf8");
     res.send(data);
   });

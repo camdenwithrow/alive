@@ -1,15 +1,17 @@
 "use strict";
 
-const alive = document.querySelector(".alive");
+const gif = document.querySelector("#gif");
+const feeling = document.querySelector(".feeling");
 const checkin = document.querySelector("#checkin-time");
 
-fetch("https://checkoncam.herokuapp.com/")
+// fetch("https://checkoncam.herokuapp.com/")
+fetch('http://localhost:3000')
   .then((response) => response.json())
   .then((data) => {
-    const feeling = data.feeling;
-    const emoji = data.emoji;
-    const gif = data.gif;
+    console.log(data)
 
+    const feelingInput = data.feeling;
+    const gifUrl = data.gif;
     const lastTime = new Date(data.lastUpdated);
 
     let lastCheckIn = lastTime.toLocaleDateString("en-us", {
@@ -21,7 +23,6 @@ fetch("https://checkoncam.herokuapp.com/")
     });
 
     checkin.innerHTML = lastCheckIn;
-
-    alive.innerHTML = aliveStuff.text;
-    alive.style.color = aliveStuff.color;
+    feeling.innerHTML = feelingInput;
+    gif.src = gifUrl;
   });
